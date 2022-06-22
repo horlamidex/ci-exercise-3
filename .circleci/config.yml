@@ -7,7 +7,6 @@ executors:
   my-executors:
     docker:
       - image: buildpack-deps:jessie
-      - image: circleci/node:13.8.0
     working_directory: /tmp
 
 # Define a job to be invoked later in a workflow.
@@ -30,7 +29,7 @@ jobs:
       - attach_workspace:
         at: tmp/workspace
       - run: |
-          if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
+          if [[ `cat /tmp/workspace/output.txt` == "Hello, world!" ]]; then
             echo "It worked!";
           else
             echo "Nope!"; exit 1
