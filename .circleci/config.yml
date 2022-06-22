@@ -23,7 +23,7 @@ jobs:
     steps:
       # - checkout
       - run: mkdir -p workspace
-      - run: echo "Hello World" > output.txt
+      - run: echo "Hello World" > workspace/output.txt
       - persist_to_workspace:
           root: workspace
           paths:
@@ -32,6 +32,8 @@ jobs:
   print_output_file:
     executor: my-executors  
     steps:
+      - attach_workspace:
+        at: tmp/workspace
       - run: |
           if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
             echo "It worked!";
