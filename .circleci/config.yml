@@ -6,7 +6,7 @@ version: 2.1
 executors:
   my-executors:
     docker:
-      - image: buildpack-deps:jessie
+      - image: nginx:alpine
     working_directory: /tmp
 
 # Define a job to be invoked later in a workflow.
@@ -15,7 +15,7 @@ jobs:
   save_hello_world_output:
     executor: my-executors
     steps:
-      # - checkout
+      - run: checkout
       - run: mkdir -p workspace
       - run: echo "Hello, world!" > workspace/output.txt
       - persist_to_workspace:
@@ -27,7 +27,7 @@ jobs:
     executor: my-executors  
     steps:
       - attach_workspace:
-          at: tmp/workspace
+          at: /tmp/workspace
       - run: |
           if [[ `cat /tmp/workspace/output.txt` == "Hello, world!" ]]; then
             echo "It worked!";
