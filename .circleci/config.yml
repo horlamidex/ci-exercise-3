@@ -28,7 +28,7 @@ jobs:
     executor: my-executors  
     steps:
       - attach_workspace:
-        at: tmp/workspace
+          at: tmp/workspace
       - run: |
           if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
             echo "It worked!";
