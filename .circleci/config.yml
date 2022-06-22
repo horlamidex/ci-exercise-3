@@ -15,7 +15,7 @@ jobs:
   save_hello_world_output:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    executor: my-executor
+    executor: my-executors
     docker:
       - image: circleci/node:13.8.0
     # Add steps to the job
@@ -31,7 +31,7 @@ jobs:
             - output.txt
   
   print_output_file:
-    executor: my-executor
+    executor: my-executors
     docker:
       - image: circleci/node:13.8.0
     
@@ -40,9 +40,10 @@ jobs:
           at: /tmp/workspace
       - run:
         if [[ `` == "Hello, Worly!" ]];
-        then
+then
           echo "It worked!"
-        else echo "Nope!"; exit 1
+        else
+          echo "Nope!"; exit 1
         fi
 
 # Invoke jobs via workflows
