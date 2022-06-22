@@ -15,7 +15,7 @@ jobs:
   save_hello_world_output:
     executor: my-executors
     steps:
-      - run: checkout
+      # - run: checkout
       - run: mkdir -p workspace
       - run: echo "Hello, world!" > workspace/output.txt
       - persist_to_workspace:
