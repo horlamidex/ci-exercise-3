@@ -32,8 +32,7 @@ jobs:
   print_output_file:
     executor: my-executors  
     steps:
-      - print_pipeline_id:
-          to: "My-Name"
+      - print_pipeline_id
       - attach_workspace:
           at: /tmp/workspace
       - run: cat /tmp/workspace/output.txt
