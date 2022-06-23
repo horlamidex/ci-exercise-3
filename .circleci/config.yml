@@ -60,7 +60,7 @@ workflows:
   btd:
     jobs:
       - save_hello_world_output
+      - failing_job
       - print_output_file:
           requires:
             - save_hello_world_output
-            - failing_job
