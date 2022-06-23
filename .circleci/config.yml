@@ -13,6 +13,11 @@ executors:
     docker:
       - image: nginx:alpine
     working_directory: /tmp
+  
+  node:
+    docker:
+      - image: circleci/node:13.8.0
+    
 
 
 # Define a job to be invoked later in a workflow.
@@ -36,6 +41,17 @@ jobs:
       - attach_workspace:
           at: /tmp/workspace
       - run: cat /tmp/workspace/output.txt
+  
+  failing_job:
+    executor: node
+    steps:
+      - run :
+          command: return 1
+      - run:
+          command: echo "Failed Job"
+          when: on_fail
+
+
       
 
 # Invoke jobs via workflows
@@ -47,3 +63,4 @@ workflows:
       - print_output_file:
           requires:
             - save_hello_world_output
+            - failing_job
